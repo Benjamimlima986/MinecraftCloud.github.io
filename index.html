@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CloudCraft</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background"></div>
+
+  <header>
+    <b>☁ CloudCraft</b>
+    <button id="login">Entrar</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span>MINECRAFT CLOUD</span>
+      <h1>Minecraft<br><strong>na nuvem.</strong></h1>
+      <p>Escolha uma versão e crie sua máquina.</p>
+    </section>
+
+    <section>
+      <div class="toolbar">
+        <h2>Versões com client.jar</h2>
+        <input id="search" placeholder="Pesquisar...">
+      </div>
+
+      <div id="status">Carregando...</div>
+      <div id="versions"></div>
+    </section>
+  </main>
+
+  <div id="loginModal" class="modal">
+    <div class="modalBox">
+      <button class="close">×</button>
+      <h2>Entrar</h2>
+      <button>Entrar com Microsoft</button>
+      <button>Perfil offline</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+  </html>
