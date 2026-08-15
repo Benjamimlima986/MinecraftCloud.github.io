@@ -1,12 +1,12 @@
 {
-  "name": "cloudcraft-container",
+  "name": "cloudcraft",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "ws": "^8.18.3"
+    "express": "^5.1.0"
   }
 }
