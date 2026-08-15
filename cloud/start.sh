@@ -2,12 +2,15 @@
 
 set -e
 
-echo "================================"
-echo " CloudCraft Container"
-echo "================================"
+echo "================================="
+echo "       CloudCraft Server"
+echo "================================="
 
-node /app/server.js &
+echo ""
+echo "Java:"
+java -version
 
-echo "WebSocket iniciado na porta 9000"
+echo ""
+echo "Iniciando servidor web..."
 
-exec nginx -g "daemon off;"
+exec node server.js
