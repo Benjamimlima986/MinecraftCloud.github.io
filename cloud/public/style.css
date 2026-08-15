@@ -1,0 +1,171 @@
+/* ============================= */
+/* GAME PAGE                     */
+/* ============================= */
+
+.game-page {
+    margin: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+#gameScreen {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+}
+
+#minecraftStream {
+    position: absolute;
+
+    inset: 0;
+
+    background: #000;
+
+    z-index: 1;
+}
+
+#loading {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #3b1635,
+            #090509
+        );
+}
+
+#loading h1 {
+    margin: 20px 0 5px;
+
+    font-size: 30px;
+}
+
+#loading p {
+    color: #d6bfd1;
+}
+
+#mobileControls {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+#mobileControls button {
+    pointer-events: auto;
+
+    min-width: 55px;
+    min-height: 55px;
+
+    margin: 4px;
+
+    border-radius: 16px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.2);
+
+    background:
+        rgba(20,20,20,.65);
+
+    color: white;
+
+    font-size: 16px;
+
+    backdrop-filter: blur(8px);
+
+    -webkit-user-select: none;
+    user-select: none;
+
+    touch-action: none;
+}
+
+.movement {
+    position: absolute;
+
+    left: 20px;
+    bottom: 30px;
+
+    text-align: center;
+}
+
+.movement button {
+    opacity: .8;
+}
+
+.actions {
+    position: absolute;
+
+    right: 20px;
+    bottom: 30px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    max-width: 250px;
+
+    justify-content: flex-end;
+}
+
+.actions button {
+    opacity: .8;
+}
+
+@media (min-width: 900px) {
+
+    #mobileControls {
+        opacity: .35;
+    }
+
+}
+
+.spinner {
+    width: 55px;
+    height: 55px;
+
+    border:
+        5px solid
+        rgba(255,255,255,.15);
+
+    border-top-color:
+        #ff55ad;
+
+    border-radius: 50%;
+
+    animation:
+        spin 1s linear infinite;
+}
+
+@keyframes spin {
+
+    to {
+        transform:
+            rotate(360deg);
+    }
+
+}
