@@ -1,8 +1,14 @@
-FROM node:22-bookworm
+FROM ubuntu:24.04
 
-RUN apt-get update && \
-    apt-get install -y nginx ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    openjdk-21-jre-headless \
+    nodejs \
+    npm \
+    curl \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -10,12 +16,13 @@ COPY package.json .
 RUN npm install --omit=dev
 
 COPY server.js .
+COPY start.sh .
 COPY public ./public
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY start.sh /start.sh
 
-RUN chmod +x /start.sh
+RUN chmod +x start.sh
+
+RUN mkdir -p /minecraft
 
 EXPOSE 8080
 
-CMD ["/start.sh"]
+CMD ["./start.sh"]
