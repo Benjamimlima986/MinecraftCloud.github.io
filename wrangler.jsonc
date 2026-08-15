@@ -1,0 +1,40 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+
+  "name": "cloudcraft",
+
+  "main": "src/index.js",
+
+  "compatibility_date": "2026-08-14",
+
+  "assets": {
+    "directory": "."
+  },
+
+  "containers": [
+    {
+      "class_name": "MinecraftContainer",
+      "image": "./cloud/Dockerfile",
+      "instance_type": "standard-1",
+      "max_instances": 10
+    }
+  ],
+
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "MINECRAFT_CONTAINER",
+        "class_name": "MinecraftContainer"
+      }
+    ]
+  },
+
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "MinecraftContainer"
+      ]
+    }
+  ]
+}
