@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+
+<title>CloudCraft Game</title>
+
+<style>
+
+html,body {
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#080509;
+  color:white;
+  font-family:Arial;
+}
+
+#screen {
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
+}
+
+#status {
+  text-align:center;
+  color:#aaa;
+}
+
+.control {
+  position:fixed;
+  padding:13px;
+  border-radius:12px;
+  border:1px solid #ffffff25;
+  background:#ffffff15;
+  color:white;
+  font-weight:bold;
+  backdrop-filter:blur(8px);
+}
+
+.esc {
+  top:20px;
+  left:20px;
+}
+
+.f1 {
+  top:20px;
+  right:20px;
+}
+
+.inv {
+  bottom:30px;
+  right:100px;
+}
+
+.chat {
+  bottom:30px;
+  right:30px;
+}
+
+.enter {
+  bottom:85px;
+  right:30px;
+}
+
+.joystick {
+  position:fixed;
+  left:25px;
+  bottom:25px;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:#ffffff08;
+  border:1px solid #ffffff20;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="screen">
+  <div id="status">
+    <h2>CloudCraft</h2>
+    <p>Conectando ao container...</p>
+  </div>
+</div>
+
+<div class="joystick"></div>
+
+<button class="control esc">ESC</button>
+<button class="control f1">F1</button>
+<button class="control inv">INV</button>
+<button class="control chat">CHAT</button>
+<button class="control enter">ENTER</button>
+
+<script>
+
+const protocol =
+  location.protocol === "https:"
+    ? "wss:"
+    : "ws:";
+
+const socket =
+  new WebSocket(
+    `${protocol}//${location.host}/ws`
+  );
+
+socket.onopen = () => {
+
+  document.getElementById("status")
+    .innerHTML = `
+      <h2>Container conectado</h2>
+      <p>Pronto para receber o cliente.</p>
+    `;
+
+};
+
+socket.onmessage = event => {
+
+  console.log(
+    "Container:",
+    event.data
+  );
+
+};
+
+socket.onclose = () => {
+
+  document.getElementById("status")
+    .innerHTML = `
+      <h2>Desconectado</h2>
+      <p>O container foi encerrado.</p>
+    `;
+
+};
+
+function sendInput(action) {
+
+  if(socket.readyState !== WebSocket.OPEN)
+    return;
+
+  socket.send(JSON.stringify({
+    type: "input",
+    action
+  }));
+
+}
+
+document.querySelector(".esc")
+  .onclick = () => sendInput("ESC");
+
+document.querySelector(".f1")
+  .onclick = () => sendInput("F1");
+
+document.querySelector(".inv")
+  .onclick = () => sendInput("INVENTORY");
+
+document.querySelector(".chat")
+  .onclick = () => sendInput("CHAT");
+
+document.querySelector(".enter")
+  .onclick = () => sendInput("ENTER");
+
+</script>
+
+</body>
+</html>
